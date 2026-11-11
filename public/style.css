@@ -1,0 +1,61 @@
+/* Ask. Light and dark follow the device, in the launcher's colours. */
+:root { color-scheme: light dark; --page: #fff; --ink: #1b1b1b; --muted: #666; --line: #e3e3e3; --card: #f6f6f4; --accent: #0078d4; --bar: #2a78d6;
+  --sans: "Segoe UI", system-ui, -apple-system, sans-serif;
+  --glyph: "Noto Sans Symbols 2", "Segoe UI Symbol", "Apple Symbols", "DejaVu Sans", serif; }
+@media (prefers-color-scheme: dark) { :root { --page: #1f1f1f; --ink: #e6e6e6; --muted: #9d9d9d; --line: #2b2b2b; --card: #252526; --accent: #4fa3f7; --bar: #3987e5; } }
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--page); color: var(--ink); font: 17px/1.6 var(--sans); }
+a { color: var(--accent); }
+.top { display: flex; gap: 10px; align-items: baseline; padding: 14px 20px; border-bottom: 1px solid var(--line); }
+.brand { font-weight: 700; color: var(--ink); text-decoration: none; }
+.crumb, .muted { color: var(--muted); }
+.small { font-size: 14px; }
+.wrap { max-width: 680px; margin: 0 auto; padding: 32px 20px 64px; }
+h1 { font-size: clamp(30px, 6vw, 42px); line-height: 1.15; margin: 0 0 20px; letter-spacing: -0.02em; }
+h2 { font-size: 20px; margin: 40px 0 8px; }
+label { display: block; font-weight: 600; margin-bottom: 6px; }
+.row { display: flex; gap: 8px; }
+input { flex: 1; min-width: 0; font: inherit; padding: 10px 12px; border: 1px solid var(--line); border-radius: 8px; background: var(--card); color: var(--ink); }
+button { font: inherit; font-weight: 600; padding: 10px 20px; border: 0; border-radius: 8px; background: var(--accent); color: #fff; cursor: pointer; }
+:is(a, button, input):focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.error { color: #d93f3f; }
+.reading { margin-top: 28px; padding: 20px; border: 1px solid var(--line); border-radius: 12px; background: var(--card); }
+.question { font-style: italic; margin: 0 0 16px; }
+.main { display: flex; gap: 20px; align-items: center; }
+.main p { margin: 2px 0; }
+.glyph { font: 96px/1 var(--glyph); }
+.name { font-size: 24px; font-weight: 700; }
+/* similarity bars (one series: accent fill on a recessive track) */
+.sims { width: 100%; border-collapse: collapse; margin-top: 20px; font-size: 15px; }
+.sims caption { text-align: left; color: var(--muted); font-size: 13px; padding-bottom: 6px; }
+.sims th, .sims td { text-align: left; font-weight: 400; padding: 8px 6px 8px 0; border-top: 1px solid var(--line); vertical-align: middle; }
+.sims thead th { color: var(--muted); font-size: 13px; border-top: 0; }
+.sims .top-row th { font-weight: 700; }
+.sims .kw { display: block; }
+.simcell { display: flex; align-items: center; gap: 8px; }
+.bar { width: 100%; min-width: 80px; height: 8px; }
+.bar .track { fill: var(--line); }
+.bar .fill { fill: var(--bar); }
+.num { font-variant-numeric: tabular-nums; text-align: right; white-space: nowrap; }
+.glyph-sm { font: 32px/1 var(--glyph); }
+code { font-size: .88em; background: var(--card); padding: 2px 6px; border-radius: 4px; overflow-wrap: anywhere; }
+/* terminal commands: click the line to copy it; a copy icon appears on hover or keyboard focus.
+   Without JavaScript one click selects the whole command (user-select: all). */
+:root { --code-bg: #efefed; --code-hover: #e6e6e3; --code-ink: #1b1b1b; }
+@media (prefers-color-scheme: dark) { :root { --code-bg: #2b2c2f; --code-hover: #333438; --code-ink: #f0f0f0; } }
+.copy { position: relative; display: flex; align-items: center; gap: 10px; margin: 10px 0 20px; padding: 12px 16px; background: var(--code-bg); border-radius: 12px; transition: background .15s; }
+.copy .prompt { color: var(--muted); font: 15px ui-monospace, "SF Mono", Menlo, Consolas, monospace; user-select: none; }
+.copy code { flex: 1; min-width: 0; overflow-x: auto; background: none; padding: 0; color: var(--code-ink); font: 15px/1.5 ui-monospace, "SF Mono", Menlo, Consolas, monospace; user-select: all; white-space: pre; }
+.copy-hint { display: none; }
+.copy-status { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+.copy.js { cursor: pointer; }
+.copy.js code { user-select: text; cursor: pointer; }
+.copy.js .copy-hint { display: flex; align-items: center; gap: 6px; flex: none; font-size: 13px; color: var(--muted); opacity: 0; transition: opacity .15s; }
+.copy.js:hover, .copy.js:focus-visible { background: var(--code-hover); }
+.copy.js:hover .copy-hint, .copy.js:focus-visible .copy-hint, .copy.js.done .copy-hint { opacity: 1; }
+.copy.js:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.copy svg { width: 17px; height: 17px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.copy .i-done, .copy.done .i-copy { display: none; }
+.copy.done .i-done { display: block; }
+.copy.done .copy-hint { color: var(--code-ink); }
+@media (hover: none) { .copy.js .copy-hint { opacity: 1; } } /* phones: no hover, so always show it */

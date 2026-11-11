@@ -1,0 +1,12 @@
+{
+  "name": "ask",
+  "version": "1.0.0",
+  "description": "An I Ching oracle made of word vectors, in the browser and in the terminal. Runs at bigthought.ai/ask.",
+  "license": "MIT",
+  "engines": { "node": ">=24" },
+  "scripts": {
+    "start": "node server.js",
+    "test": "node --test test/*.test.js",
+    "build:data": "node model/build.js"
+  }
+}
