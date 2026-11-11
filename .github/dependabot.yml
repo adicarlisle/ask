@@ -1,0 +1,13 @@
+# Weekly update proposals. CI merges them automatically once the tests pass (see workflows/ci.yml).
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    schedule: { interval: weekly }
+  - package-ecosystem: docker
+    directory: /
+    schedule: { interval: weekly }
+    ignore:
+      # Major Node versions are moved by hand, LTS to LTS (odd-numbered releases get no long-term support).
+      - dependency-name: node
+        update-types: [version-update:semver-major]
